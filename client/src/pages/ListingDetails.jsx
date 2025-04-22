@@ -18,9 +18,11 @@ const ListingDetails = () => {
   const { listingId } = useParams();
   const [listing, setListing] = useState(null);
 
+  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+
   const getListingDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/listing/${listingId}`, {
+      const response = await fetch(`${API_URL}/listing/${listingId}`, {
         method: "GET",
       });
       const data = await response.json();
@@ -77,7 +79,7 @@ const ListingDetails = () => {
         description: listing.description,
       };
 
-      const response = await fetch("http://localhost:4000/bookings/create", {
+      const response = await fetch(`${API_URL}/bookings/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -132,7 +134,7 @@ const ListingDetails = () => {
           </div>
           <div className="flex items-center gap-x-3 py-6">
             <img
-              src={`http://localhost:4000/${listing?.creator?.profileImagePath?.replace("public", "")}`}
+              src={`${API_URL}/${listing?.creator?.profileImagePath?.replace("public", "")}`}
               alt="Creator"
               height={44}
               width={44}
@@ -217,7 +219,7 @@ const ListingDetails = () => {
                 key={index}
                 className={`${index === 0 ? "w-full" : "w-1/2"} p-2`}>
                 <img
-                  src={`http://localhost:4000/${item.replace("public", "")}`}
+                  src={`${API_URL}/${item.replace("public", "")}`}
                   alt="Listing"
                   className={`max-w-full ${index === 0 ? "object-contain rounded-3xl" : "rounded-2xl"}`}
                 />

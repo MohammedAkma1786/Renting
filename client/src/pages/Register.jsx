@@ -15,29 +15,30 @@ const Register = () => {
     profileImage: null,
   });
 
+  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
       [name]: name === "profileImage" ? files[0] : value,
     });
   };
-
-  console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const register_form = new FormData();
 
-      for (var key in formData) {
+      for (const key in formData) {
         register_form.append(key, formData[key]);
       }
-      const response = await fetch("http://localhost:4000/auth/register", {
+
+      const response = await fetch(`${API_URL}/auth/register`, {
         method: "POST",
         body: register_form,
       });
+
       if (response.ok) {
         navigate("/login");
       }
@@ -47,18 +48,20 @@ const Register = () => {
   };
 
   useEffect(() => {
-    setPasswordMatch(formData.password === formData.confirmPassword || formData.confirmPassword === "");
-  }, [formData.password, formData.confirmPassword]); // Added dependency array to avoid infinite loop
+    setPasswordMatch(
+      formData.password === formData.confirmPassword || formData.confirmPassword === ""
+    );
+  }, [formData.password, formData.confirmPassword]);
 
   return (
     <div className="absolute h-full w-full bg-primary/40 z-50 flexCenter">
       <div>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-y-2 bg-white w-[366px] p-7 rounded-xl shadow-md text-[14px]">
+          className="flex flex-col gap-y-2 bg-white w-[366px] p-7 rounded-xl shadow-md text-[14px]"
+        >
           <div className="flex justify-between items-baseline my-4">
             <h4 className="bold-28">{"Sign Up"}</h4>
-            {/* <FaXmark onClick={() => setShowLogin(false)} className='medium-20 text-slate-900/70 cursor-pointer' /> */}
           </div>
           <input
             onChange={handleChange}
@@ -101,7 +104,7 @@ const Register = () => {
             className="bg-primary text-white border p-2 pl-4 rounded-md outline-none"
           />
 
-          {!passwordMatch && <p>Password do not match</p>}
+          {!passwordMatch && <p>Passwords do not match</p>}
 
           <input
             onChange={handleChange}
@@ -125,16 +128,15 @@ const Register = () => {
               )}
             </div>
           </label>
-          <button
-            type="submit"
-            className="btn-secondary rounded">
+          <button type="submit" className="btn-secondary rounded">
             Register
           </button>
           <div className="text-gray-30">
             Already have an account?{" "}
             <Link
               to={"/login"}
-              className="bg-primary/40 rounded-md p-1 text-white cursor-pointer">
+              className="bg-primary/40 rounded-md p-1 text-white cursor-pointer"
+            >
               Login
             </Link>
           </div>

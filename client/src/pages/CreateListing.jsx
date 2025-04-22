@@ -102,6 +102,8 @@ const CreateListing = ({
   };
 
   const creatorId = useSelector((state) => state.user._id);
+  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+
   const handlePost = async (e) => {
     e.preventDefault();
     try {
@@ -129,7 +131,7 @@ const CreateListing = ({
       });
 
       // Send a POST request to the server
-      const response = await fetch("http://localhost:4000/listing/create", {
+      const response = await fetch(`${API_URL}/listing/create`, {
         method: "POST",
         body: listingForm,
       });

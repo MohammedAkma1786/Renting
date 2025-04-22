@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setLogin } from "../redux/state";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:4000/auth/login", {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,7 +44,8 @@ const Login = () => {
       <div>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-y-2 bg-white w-[366px] p-7 rounded-xl shadow-md text-[14px]">
+          className="flex flex-col gap-y-2 bg-white w-[366px] p-7 rounded-xl shadow-md text-[14px]"
+        >
           <div className="flex justify-between items-baseline my-4">
             <h4 className="bold-28">{"Login"}</h4>
           </div>
@@ -62,16 +67,15 @@ const Login = () => {
             required
             className="bg-primary text-secondary border p-2 pl-4 rounded-md outline-none"
           />
-          <button
-            type="submit"
-            className="btn-secondary rounded">
+          <button type="submit" className="btn-secondary rounded">
             Login
           </button>
           <div className="text-gray-30">
             Don't have an account?
             <Link
               to={"/register"}
-              className="text-white bg-primary/40 rounded-md p-1 cursor-pointer">
+              className="text-white bg-primary/40 rounded-md p-1 cursor-pointer"
+            >
               Register
             </Link>
           </div>
@@ -80,4 +84,5 @@ const Login = () => {
     </div>
   );
 };
+
 export default Login;
