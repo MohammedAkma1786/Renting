@@ -12,9 +12,12 @@ const Category = () => {
   const dispatch = useDispatch();
 
   const listings = useSelector((state) => state.listings);
+
+  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+
   const getFeedListings = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/listing?category=${category}`, {
+      const response = await fetch(`${API_URL}/listing?category=${category}`, {
         method: "GET",
       });
       const data = await response.json();
