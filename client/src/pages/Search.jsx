@@ -12,14 +12,13 @@ const Search = () => {
   const listings = useSelector((state) => state.listings);
   const dispatch = useDispatch();
 
+  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+
   const getSearchListing = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:4000/listing/search/${search}`,
-        {
-          method: "GET",
-        }
-      );
+      const response = await fetch(`${API_URL}/listing/search/${search}`, {
+        method: "GET",
+      });
       const data = await response.json();
       dispatch(setListings({ listings: data }));
       setLoading(false);

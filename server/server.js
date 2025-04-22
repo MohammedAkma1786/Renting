@@ -62,7 +62,8 @@ connectDB();
 
 app.listen(PORT, (err) => {
   if (!err) {
-    console.log(`Server Started on http://localhost:${PORT}`);
+    console.log(`Server started on port ${PORT}`);
+    console.log(`Access the server at your deployment URL.`);
   } else {
     console.log("Error: " + err);
   }

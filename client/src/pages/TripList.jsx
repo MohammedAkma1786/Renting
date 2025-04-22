@@ -11,14 +11,13 @@ const TripList = () => {
   const tripList = useSelector((state) => state.user.tripList);
   const dispatch = useDispatch();
 
+  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+
   const getTripList = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:4000/users/${userId}/trips`,
-        {
-          method: "GET",
-        }
-      );
+      const response = await fetch(`${API_URL}/users/${userId}/trips`, {
+        method: "GET",
+      });
 
       const data = await response.json();
       dispatch(setTripList(data));
@@ -32,7 +31,6 @@ const TripList = () => {
     getTripList();
   }, []);
 
-  // console.log(tripList);
   return loading ? (
     <Loader />
   ) : (
