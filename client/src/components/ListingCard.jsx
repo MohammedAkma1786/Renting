@@ -27,7 +27,7 @@ const ListingCard = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+  const API_URL = import.meta.env.VITE_API_URL; // Use import.meta.env for Vite
 
   const goToPrevSlide = () => {
     setCurrentIndex(

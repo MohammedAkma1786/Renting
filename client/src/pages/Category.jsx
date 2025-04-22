@@ -13,7 +13,7 @@ const Category = () => {
 
   const listings = useSelector((state) => state.listings);
 
-  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+  const API_URL = import.meta.env.VITE_API_URL; // Use import.meta.env for Vite
 
   const getFeedListings = async () => {
     try {
@@ -38,23 +38,38 @@ const Category = () => {
     <>
       <Header />
       <section className="max-padd-container py-12">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-primary mb-6 capitalize">{category} Listings</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-primary mb-6 capitalize">
+          {category} Listings
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {listings?.map(({ _id, creator, listingPhotoPaths, city, province, country, category, type, price, booking = false }) => (
-            <ListingCard
-              key={_id}
-              listingId={_id}
-              creator={creator}
-              listingPhotoPaths={listingPhotoPaths}
-              city={city}
-              province={province}
-              country={country}
-              category={category}
-              type={type}
-              price={price}
-              booking={booking}
-            />
-          ))}
+          {listings?.map(
+            ({
+              _id,
+              creator,
+              listingPhotoPaths,
+              city,
+              province,
+              country,
+              category,
+              type,
+              price,
+              booking = false,
+            }) => (
+              <ListingCard
+                key={_id}
+                listingId={_id}
+                creator={creator}
+                listingPhotoPaths={listingPhotoPaths}
+                city={city}
+                province={province}
+                country={country}
+                category={category}
+                type={type}
+                price={price}
+                booking={booking}
+              />
+            )
+          )}
         </div>
       </section>
     </>

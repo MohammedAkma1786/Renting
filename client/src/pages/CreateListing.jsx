@@ -102,7 +102,7 @@ const CreateListing = ({
   };
 
   const creatorId = useSelector((state) => state.user._id);
-  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+  const API_URL = import.meta.env.VITE_API_URL; // Use import.meta.env for Vite
 
   const handlePost = async (e) => {
     e.preventDefault();

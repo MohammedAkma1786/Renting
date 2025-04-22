@@ -18,7 +18,7 @@ const ListingDetails = () => {
   const { listingId } = useParams();
   const [listing, setListing] = useState(null);
 
-  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+  const API_URL = import.meta.env.VITE_API_URL; // Use import.meta.env for Vite
 
   const getListingDetails = async () => {
     try {
@@ -47,13 +47,12 @@ const ListingDetails = () => {
   ]);
 
   const handleSelect = (ranges) => {
-    // Update the selected date range when the user makes a selection
     setDateRange([ranges.selection]);
   };
 
   const start = new Date(dateRange[0].startDate);
   const end = new Date(dateRange[0].endDate);
-  const dayCount = Math.round(end - start) / (1000 * 60 * 60 * 24); // Calculate the difference in day units
+  const dayCount = Math.round((end - start) / (1000 * 60 * 60 * 24)); // Calculate the difference in day units
 
   /* SUBMIT BOOKING */
   const customerId = useSelector((state) => state?.user?._id);
@@ -64,7 +63,7 @@ const ListingDetails = () => {
   const handleSubmit = async () => {
     if (isOwner) {
       alert("You cannot book your own property.");
-      return; // Exit the function without submitting the booking form
+      return;
     }
 
     try {
@@ -100,7 +99,7 @@ const ListingDetails = () => {
   ) : (
     <>
       <Header />
-      <section className=" text-white max-padd-container flex gap-12 flex-col-reverse xl:flex-row py-10">
+      <section className="text-white max-padd-container flex gap-12 flex-col-reverse xl:flex-row py-10">
         {/* Left */}
         <div className="flex-1">
           <div>
@@ -164,10 +163,7 @@ const ListingDetails = () => {
           {/* Booking Calendar */}
           <div className="pt-9">
             <h4 className="h4 py-3 my-2 text-white">How long do you want to stay?</h4>
-            <DateRange
-              ranges={dateRange}
-              onChange={handleSelect}
-            />
+            <DateRange ranges={dateRange} onChange={handleSelect} />
             <div className="flexStart gap-4 flex-wrap py-7">
               <div>
                 {dayCount > 1 ? (
@@ -204,7 +200,7 @@ const ListingDetails = () => {
             <button
               type="submit"
               onClick={handleSubmit}
-              className=" btn-secondary rounded-full flexCenter gap-x-2 capitalize"
+              className="btn-secondary rounded-full flexCenter gap-x-2 capitalize"
               disabled={isOwner}>
               {isOwner ? "You can't book your own property" : "Book the visit"}
             </button>

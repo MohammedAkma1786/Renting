@@ -15,7 +15,7 @@ const Register = () => {
     profileImage: null,
   });
 
-  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+  const API_URL = import.meta.env.VITE_API_URL; // Use import.meta.env for Vite
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -120,7 +120,7 @@ const Register = () => {
               {formData.profileImage ? (
                 <img
                   src={URL.createObjectURL(formData.profileImage)}
-                  alt=""
+                  alt="Profile Preview"
                   className="p-1 h-16 object-contain aspect-square"
                 />
               ) : (

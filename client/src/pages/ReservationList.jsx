@@ -12,7 +12,7 @@ const ReservationList = () => {
 
   const dispatch = useDispatch();
 
-  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+  const API_URL = import.meta.env.VITE_API_URL; // Use import.meta.env for Vite
 
   const getReservationList = async () => {
     try {
@@ -24,7 +24,7 @@ const ReservationList = () => {
       dispatch(setReservationList(data));
       setLoading(false);
     } catch (err) {
-      console.log("Fetch Trip List Failed!", err.message);
+      console.log("Fetch Reservation List Failed!", err.message);
     }
   };
 

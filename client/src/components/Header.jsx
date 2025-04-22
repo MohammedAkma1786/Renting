@@ -12,7 +12,7 @@ const Header = ({ setShowLogin }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+  const API_URL = import.meta.env.VITE_API_URL; // Use import.meta.env for Vite
 
   const toggleMenu = () => {
     setMenuOpened(!menuOpened);
@@ -66,7 +66,7 @@ const Header = ({ setShowLogin }) => {
             ) : (
               <img
                 src={`${API_URL}/${user.profileImagePath.replace("public", "")}`}
-                alt=""
+                alt="User Profile"
                 height={47}
                 width={47}
                 className="rounded-full object-cover"
