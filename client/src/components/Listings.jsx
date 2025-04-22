@@ -13,7 +13,7 @@ const Listings = () => {
 
   const getFeedListings = async () => {
     try {
-      const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+      const API_URL = process.env.REACT_APP_API_URL;
       const response = await fetch(
         selectedCategory !== "All"
           ? `${API_URL}/listing?category=${selectedCategory}`
