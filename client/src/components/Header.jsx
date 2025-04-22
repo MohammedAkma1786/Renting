@@ -12,6 +12,8 @@ const Header = ({ setShowLogin }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+
   const toggleMenu = () => {
     setMenuOpened(!menuOpened);
   };
@@ -63,7 +65,7 @@ const Header = ({ setShowLogin }) => {
               <FaUser size={24} />
             ) : (
               <img
-                src={`http://localhost:4000/${user.profileImagePath.replace("public", "")}`}
+                src={`${API_URL}/${user.profileImagePath.replace("public", "")}`}
                 alt=""
                 height={47}
                 width={47}

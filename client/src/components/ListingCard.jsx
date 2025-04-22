@@ -27,6 +27,8 @@ const ListingCard = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const API_URL = process.env.REACT_APP_API_URL; // Use the environment variable
+
   const goToPrevSlide = () => {
     setCurrentIndex(
       (prevIndex) =>
@@ -47,7 +49,7 @@ const ListingCard = ({
   const patchWishList = async () => {
     if (user?._id !== creator._id) {
       const response = await fetch(
-        `http://localhost:4000/users/${user?._id}/${listingId}`,
+        `${API_URL}/users/${user?._id}/${listingId}`,
         {
           method: "PATCH",
           headers: {
@@ -81,7 +83,7 @@ const ListingCard = ({
               className="relative flex-none w-full h-[266px] items-center"
             >
               <img
-                src={`http://localhost:4000/${photo.replace("public", "")}`}
+                src={`${API_URL}/${photo.replace("public", "")}`}
                 alt={`photo ${i + 1}`}
                 className="h-full w-full rounded-[2rem]"
               />
